@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProiectTMWA_Final.Views.NewMovie">
+
+    <StackLayout Margin="10,10,10,0">
+        <Entry x:Name="entryName" Placeholder="Movie Name: " />
+        <Entry x:Name="entryYear" Placeholder="Release year: " Keyboard="Numeric"/>
+        <Entry x:Name="entryGenre" Placeholder="Genre: "/>
+        <Entry x:Name="entryDuration" Placeholder="Duration: (min) " Keyboard="Numeric"/>
+        <Entry x:Name="entryScore" Placeholder="Score: " Keyboard="Numeric"/>
+        <Button Text="Save" Clicked="Button_Clicked"/>
+
+    </StackLayout>
+</ContentPage>
