@@ -1,4 +1,6 @@
-﻿using ProiectTMWA_Final.Helpers;
+﻿using MvvmHelpers;
+using ProiectTMWA_Final.Helpers;
+using ProiectTMWA_Final.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

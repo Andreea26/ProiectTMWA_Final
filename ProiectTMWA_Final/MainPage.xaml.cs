@@ -51,7 +51,7 @@ namespace ProiectTMWA_Final
             Navigation.PushAsync(new MainPage());
         }
 
-        private void Remove(object sender, EventArgs e)
+        private async void Remove(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             StackLayout listViewItem = (StackLayout)button.Parent;
@@ -62,18 +62,21 @@ namespace ProiectTMWA_Final
             var service = DependencyService.Get<Services.IMoviesService>();
             ResponseStatus reponse = service.RemoveMovie(int.Parse(movieId));
 
+
             if (ResponseStatus.OK.Equals(reponse))
             {
-                DisplayAlert("Success", "Movie removed!", "Ok");
+                await DisplayAlert("Success", "Movie removed!", "Ok");
             }
             else
             {
-                DisplayAlert("Failure", "Movie not removed!", "Ok");
+               await DisplayAlert("Failure", "Movie not removed!", "Ok");
             }
+
+            OnAppearing();
 
         }
 
-        private void UpdateMovieProgress(object sender, EventArgs e)
+        private async void UpdateMovieProgress(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             StackLayout listViewItem = (StackLayout)button.Parent;
@@ -86,12 +89,14 @@ namespace ProiectTMWA_Final
 
             if (ResponseStatus.OK.Equals(reponse))
             {
-                DisplayAlert("Success", "Status updated!", "Ok");
+                await DisplayAlert("Success", "Status updated!", "Ok");
             }
             else
             {
-                DisplayAlert("Failure", "Status not updated!", "Ok");
+                await DisplayAlert("Failure", "Status not updated!", "Ok");
             }
+
+            OnAppearing();
 
         }
 

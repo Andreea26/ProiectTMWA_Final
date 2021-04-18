@@ -8,7 +8,7 @@ namespace ProiectTMWA_Final.Model
 {
     public class ApiMovie
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public string Name { get; set; }
         public string ImageThumbnailPath { get; set; }
