@@ -64,7 +64,7 @@ namespace ProiectTMWA_Final.Views
 
         private void AllMovies_Activated(object sender, EventArgs e)
         {
-            /* Navigation.PushAsync(new AllMovies());*/
+            Navigation.PushAsync(new AllMovies());
         }
 
         private void MyMovies_Activated(object sender, EventArgs e)

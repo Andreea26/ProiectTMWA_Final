@@ -34,23 +34,6 @@ namespace ProiectTMWA_Final
             Navigation.PushAsync(new NewMovie());
         }
 
-        private async void Show_Movies(object sender, EventArgs e)
-        {
-            var service = DependencyService.Get<Services.IMoviesService>();
-
-            var results = await service.ShowAllMovies();
-
-            printMovies(results);
-        }
-
-        private void printMovies(IList<Model.ApiMovie> results)
-        {
-            foreach (ApiMovie movie in results)
-            {
-                Console.WriteLine(movie.Id + " " + movie.Name + " " + movie.ImageThumbnailPath);
-            }
-        }
-
         private void AddMovie_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NewMovie());
@@ -58,7 +41,7 @@ namespace ProiectTMWA_Final
 
         private void AllMovies_Activated(object sender, EventArgs e)
         {
-           /* Navigation.PushAsync(new AllMovies());*/
+            Navigation.PushAsync(new AllMovies());
         }
 
         private void MyMovies_Activated(object sender, EventArgs e)

@@ -17,5 +17,9 @@ namespace ProiectTMWA_Final.Model
 
         public string StatusDisplayed => $"{Status}";
 
+        public string ImageUrl => $"{ImageThumbnailPath}";
+
+        public string IdToDisplay => $"{Id}";
+
     }
 }

@@ -4,17 +4,11 @@
              x:Class="ProiectTMWA_Final.Views.NewMovie">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Movie" Activated="AddMovie_Activated">
+        <ToolbarItem Text="Add Movie" Activated="AddMovie_Activated"/>
+        <ToolbarItem Text="All Movies" Activated="AllMovies_Activated"/>
+        <ToolbarItem Text="My Movies" Activated="MyMovies_Activated"/>
 
-        </ToolbarItem>
 
-        <ToolbarItem Text="All Movies" Activated="AllMovies_Activated">
-
-        </ToolbarItem>
-
-        <ToolbarItem Text="My Movies" Activated="MyMovies_Activated">
-
-        </ToolbarItem>
     </ContentPage.ToolbarItems>
     
     <StackLayout Margin="10,10,10,0">
