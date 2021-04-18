@@ -40,5 +40,16 @@ namespace ProiectTMWA_Final.Views
         {
             Navigation.PushAsync(new MainPage());
         }
+
+        private void AddToMyList(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            StackLayout listViewItem = (StackLayout)button.Parent;
+            Label label = (Label)listViewItem.Children[0];
+
+            String text = label.Text;
+
+            Console.WriteLine(text);
+        }
     }
 }

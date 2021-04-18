@@ -19,7 +19,10 @@ namespace ProiectTMWA_Final.Model
 
         public string ImageUrl => $"{ImageThumbnailPath}";
 
-        public string IdToDisplay => $"{Id}";
+        public override string ToString()
+        {
+            return "Movie: " + Id + " " + Name;
+        }
 
     }
 }
