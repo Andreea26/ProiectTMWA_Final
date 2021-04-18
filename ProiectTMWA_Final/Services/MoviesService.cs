@@ -7,6 +7,8 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using SQLite;
+using ProiectTMWA_Final.Helpers;
 
 namespace ProiectTMWA_Final.Services
 {
@@ -48,17 +50,90 @@ namespace ProiectTMWA_Final.Services
 
                 var movie = movieDetails?.tvShow;
 
+                List<string> genres = JsonConvert.DeserializeObject<List<string>>(movie.genres.ToString());
                 return new ApiMovieWithDetails
                 {
                     Id = movie.id,
                     Name = movie.name,
                     Description = movie.description,
                     Rating = movie.rating,
-                    Genres = movie.genres,
+                    Genres = genres,
                     ImageThumbnailPath = movie.image_thumbnail_path
                 };
 
             }
         }
+
+        public ResponseStatus AddMovieToMyList(string movieName, StatusType status)
+        {
+
+            ResponseStatus response;
+
+            ApiMovie newMovie = new ApiMovie
+            {
+                Name = movieName,
+                Status = status
+            };
+
+            return AddMovie(out response, newMovie);
+        }
+
+        public ResponseStatus AddMovieToMyList(string movieName, StatusType status, int id)
+        {
+            ResponseStatus response;
+
+            ApiMovie newMovie = new ApiMovie
+            {
+                Id = id,
+                Name = movieName,
+                Status = status
+            };
+            return AddMovie(out response, newMovie);
+        }
+
+        private static ResponseStatus AddMovie(out ResponseStatus response, ApiMovie newMovie)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                try
+                {
+                    conn.CreateTable<ApiMovie>();
+                    int nb = conn.Insert(newMovie);
+
+                    response = nb > 0 ? ResponseStatus.OK : ResponseStatus.NOT_OK;
+                }
+                catch (SQLiteException ex)
+                {
+                    response = ResponseStatus.EXIST;
+                }
+
+                return response;
+            }
+        }
+
+        public ResponseStatus RemoveMovie(int movieId)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+
+                int nb = conn.Delete<ApiMovie>(movieId);
+
+                return nb > 0 ? ResponseStatus.OK : ResponseStatus.NOT_OK;
+            }
+        }
+
+        public ResponseStatus UpdateProgress(int movieId, string newStatus)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                var movie = conn.Get<ApiMovie>(movieId);
+                movie.Status = MovieHelper.GetStatusEnumItem(newStatus);
+
+                int nb = conn.Update(movie);
+
+                return nb > 0 ? ResponseStatus.OK : ResponseStatus.NOT_OK;
+            }
+        }
+
     }
 }

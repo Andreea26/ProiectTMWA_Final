@@ -14,7 +14,11 @@ namespace ProiectTMWA_Final
             InitializeComponent();
             DependencyService.Register<Services.MoviesService>();
             DB_PATH = db_path;
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#333333"),
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()

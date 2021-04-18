@@ -1,4 +1,5 @@
 ﻿//using NHibernate.Classic;
+using ProiectTMWA_Final.Helpers;
 using ProiectTMWA_Final.Model;
 using System;
 using System.Collections.Generic;
@@ -21,41 +22,27 @@ namespace ProiectTMWA_Final.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            ApiMovie movie = new ApiMovie
+            string name = entryName.Text ?? string.Empty;
+            StatusType status = MovieHelper.GetStatusEnumItem(statusPicker.SelectedItem.ToString());
+
+            var service = DependencyService.Get<Services.IMoviesService>();
+
+            ResponseStatus reponse = service.AddMovieToMyList(name, status);
+
+            if (ResponseStatus.OK.Equals(reponse))
             {
-                Name = entryName.Text == null ? string.Empty : entryName.Text,
-                Status = GetStatusEnumItem(statusPicker.SelectedItem.ToString())
-            };
-            using(SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<ApiMovie>();
-                var nbOfRows = conn.Insert(movie);
-                if (nbOfRows > 0)
-                {
-                    DisplayAlert("Success", "Movie added!", "Ok");
-                }
-                else
-                {
-                    DisplayAlert("Failure", "Movie not added!", "Ok");
-                }
+                DisplayAlert("Success", "Movie added!", "Ok");
             }
-
-        }
-
-        private StatusType GetStatusEnumItem(string status)
-        {
-            switch (status)
+            else if (ResponseStatus.NOT_OK.Equals(reponse))
             {
-                case "Not started":
-                    return StatusType.NOT_STARTED;
-                case "In progress":
-                    return StatusType.IN_PROGRESS;
-                case "Watched":
-                    return StatusType.WATCHED;
-                default:
-                    return StatusType.NOT_STARTED;
+                DisplayAlert("Failure", "Movie not added!", "Ok");
+            }
+            else
+            {
+                DisplayAlert("Failure", "Movie is already in your list!", "Ok");
             }
         }
+
 
         private void AddMovie_Activated(object sender, EventArgs e)
         {

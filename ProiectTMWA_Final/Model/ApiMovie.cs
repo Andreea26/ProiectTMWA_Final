@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ProiectTMWA_Final.Helpers;
 using SQLite;
 
 namespace ProiectTMWA_Final.Model
@@ -15,13 +16,14 @@ namespace ProiectTMWA_Final.Model
 
         public string NameDisplayed => $"{Name}";
 
-        public string StatusDisplayed => $"{Status}";
+    
+        public string StatusDisplayed => MovieHelper.TranslateStatus(Status);
 
         public string ImageUrl => $"{ImageThumbnailPath}";
 
         public override string ToString()
         {
-            return "Movie: " + Id + " " + Name;
+            return Id + " " + Name;
         }
 
     }

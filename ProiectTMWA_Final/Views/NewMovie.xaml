@@ -4,16 +4,14 @@
              x:Class="ProiectTMWA_Final.Views.NewMovie">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Movie" Activated="AddMovie_Activated"/>
-        <ToolbarItem Text="All Movies" Activated="AllMovies_Activated"/>
-        <ToolbarItem Text="My Movies" Activated="MyMovies_Activated"/>
-
-
+        <ToolbarItem Text="New TV Show" Activated="AddMovie_Activated"/>
+        <ToolbarItem Text="My List" Activated="MyMovies_Activated"/>
+        <ToolbarItem Text="Popular" Activated="AllMovies_Activated"/>
     </ContentPage.ToolbarItems>
-    
-    <StackLayout Margin="10,10,10,0">
-        <Entry x:Name="entryName" Placeholder="TV Show Name: " />
-        <Picker x:Name="statusPicker" Title="Status">            <Picker.Items>                <x:String>Not started</x:String>                <x:String>In progress</x:String>                <x:String>Watched</x:String>            </Picker.Items>        </Picker>
+
+    <StackLayout Margin="40,80,40,0" >
+        <Entry x:Name="entryName" Placeholder="TV Show Name: "  />
+        <Picker x:Name="statusPicker" Title="Status" >            <Picker.Items>                <x:String>Not started</x:String>                <x:String>In progress</x:String>                <x:String>Watched</x:String>            </Picker.Items>        </Picker>
 
         <Button Text="Save" Clicked="Button_Clicked"/>
     </StackLayout>
