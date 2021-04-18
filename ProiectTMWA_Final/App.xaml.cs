@@ -7,16 +7,12 @@ namespace ProiectTMWA_Final
     public partial class App : Application
     {
         public static string DB_PATH = string.Empty;
-        public App()
-        {
-            InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
-        }
 
         public App(string db_path)
         {
             InitializeComponent();
+            DependencyService.Register<Services.MoviesService>();
             DB_PATH = db_path;
             MainPage = new NavigationPage(new MainPage());
         }

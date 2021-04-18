@@ -4,15 +4,23 @@
              x:Class="ProiectTMWA_Final.MainPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Activated="ToolbarItem_Activated">
-            
+        <ToolbarItem Text="Add Movie" Activated="AddMovie_Activated">
+
+        </ToolbarItem>
+
+        <ToolbarItem Text="All Movies" Activated="AllMovies_Activated">
+
+        </ToolbarItem>
+
+        <ToolbarItem Text="My Movies" Activated="MyMovies_Activated">
+
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ListView x:Name="moviesListView">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Text}" Detail="{Binding TextDetail}"/>
+                <TextCell Text="{Binding NameDisplayed}" Detail="{Binding StatusDisplayed}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

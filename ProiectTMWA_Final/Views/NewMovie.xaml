@@ -3,13 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProiectTMWA_Final.Views.NewMovie">
 
-    <StackLayout Margin="10,10,10,0">
-        <Entry x:Name="entryName" Placeholder="Movie Name: " />
-        <Entry x:Name="entryYear" Placeholder="Release year: " Keyboard="Numeric"/>
-        <Entry x:Name="entryGenre" Placeholder="Genre: "/>
-        <Entry x:Name="entryDuration" Placeholder="Duration: (min) " Keyboard="Numeric"/>
-        <Entry x:Name="entryScore" Placeholder="Score: " Keyboard="Numeric"/>
-        <Button Text="Save" Clicked="Button_Clicked"/>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Movie" Activated="AddMovie_Activated">
 
+        </ToolbarItem>
+
+        <ToolbarItem Text="All Movies" Activated="AllMovies_Activated">
+
+        </ToolbarItem>
+
+        <ToolbarItem Text="My Movies" Activated="MyMovies_Activated">
+
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="10,10,10,0">
+        <Entry x:Name="entryName" Placeholder="TV Show Name: " />
+        <Picker x:Name="statusPicker" Title="Status">            <Picker.Items>                <x:String>Not started</x:String>                <x:String>In progress</x:String>                <x:String>Watched</x:String>            </Picker.Items>        </Picker>
+
+        <Button Text="Save" Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>
