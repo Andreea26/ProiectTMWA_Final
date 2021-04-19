@@ -18,6 +18,6 @@ namespace ProiectTMWA_Final.Services
 
         ResponseStatus RemoveMovie(int movieId);
 
-        ResponseStatus UpdateProgress(int movieId, string newStatus);
+        ResponseStatus UpdateProgress(int movieId, StatusType newStatus);
     }
 }

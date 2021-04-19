@@ -16,6 +16,61 @@ namespace ProiectTMWA_Final.Model
 
         public string NameDisplayed => $"{Name}";
 
+        public bool DisplayNotStartedButton
+        {
+            get
+            {
+                if (Status == StatusType.WATCHED)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                
+            }
+        }
+        public bool DisplayInProgressButton
+        {
+            get
+            {
+                if (Status == StatusType.NOT_STARTED || Status == StatusType.WATCHED)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+
+            }
+        }
+        public bool DisplayWatchedButton
+        {
+            get
+            {
+                if (Status == StatusType.IN_PROGRESS)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+
+            }
+        }
+
     
         public string StatusDisplayed => MovieHelper.TranslateStatus(Status);
 

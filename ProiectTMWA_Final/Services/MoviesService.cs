@@ -122,12 +122,12 @@ namespace ProiectTMWA_Final.Services
             }
         }
 
-        public ResponseStatus UpdateProgress(int movieId, string newStatus)
+        public ResponseStatus UpdateProgress(int movieId, StatusType newStatus)
         {
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 var movie = conn.Get<ApiMovie>(movieId);
-                movie.Status = MovieHelper.GetStatusEnumItem(newStatus);
+                movie.Status = newStatus;
 
                 int nb = conn.Update(movie);
 

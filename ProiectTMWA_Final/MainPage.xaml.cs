@@ -76,7 +76,7 @@ namespace ProiectTMWA_Final
 
         }
 
-        private async void UpdateMovieProgress(object sender, EventArgs e)
+        private async void UpdateMovieProgressNotStarted(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             StackLayout listViewItem = (StackLayout)button.Parent;
@@ -85,7 +85,7 @@ namespace ProiectTMWA_Final
             String movieId = MovieHelper.GetId(label.Text);
 
             var service = DependencyService.Get<Services.IMoviesService>();
-            ResponseStatus reponse = service.UpdateProgress(int.Parse(movieId), "Watched");
+            ResponseStatus reponse = service.UpdateProgress(int.Parse(movieId), StatusType.NOT_STARTED);
 
             if (ResponseStatus.OK.Equals(reponse))
             {
@@ -95,9 +95,49 @@ namespace ProiectTMWA_Final
             {
                 await DisplayAlert("Failure", "Status not updated!", "Ok");
             }
-
             OnAppearing();
+        }
+        private async void UpdateMovieProgressWatched(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            StackLayout listViewItem = (StackLayout)button.Parent;
+            Label label = (Label)listViewItem.Children[0];
 
+            String movieId = MovieHelper.GetId(label.Text);
+
+            var service = DependencyService.Get<Services.IMoviesService>();
+            ResponseStatus reponse = service.UpdateProgress(int.Parse(movieId), StatusType.WATCHED);
+
+            if (ResponseStatus.OK.Equals(reponse))
+            {
+                await DisplayAlert("Success", "Status updated!", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Failure", "Status not updated!", "Ok");
+            }
+            OnAppearing();
+        }
+        private async void UpdateMovieProgressInProgress(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            StackLayout listViewItem = (StackLayout)button.Parent;
+            Label label = (Label)listViewItem.Children[0];
+
+            String movieId = MovieHelper.GetId(label.Text);
+
+            var service = DependencyService.Get<Services.IMoviesService>();
+            ResponseStatus reponse = service.UpdateProgress(int.Parse(movieId), StatusType.IN_PROGRESS);
+
+            if (ResponseStatus.OK.Equals(reponse))
+            {
+                await DisplayAlert("Success", "Status updated!", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Failure", "Status not updated!", "Ok");
+            }
+            OnAppearing();
         }
 
     }
