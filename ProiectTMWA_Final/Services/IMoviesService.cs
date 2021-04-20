@@ -14,6 +14,8 @@ namespace ProiectTMWA_Final.Services
 
         ResponseStatus AddMovieToMyList(string movieName, StatusType status);
 
+        IList<ApiMovie> GetAllMovies();
+
         ResponseStatus AddMovieToMyList(string movieName, StatusType status, int id);
 
         ResponseStatus RemoveMovie(int movieId);

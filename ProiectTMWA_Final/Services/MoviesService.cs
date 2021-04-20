@@ -26,7 +26,8 @@ namespace ProiectTMWA_Final.Services
 
                 var results = new List<Model.ApiMovie>();
 
-                foreach (var movie in moviesData?.tv_shows) {
+                foreach (var movie in moviesData?.tv_shows)
+                {
                     results.Add(new ApiMovie
                     {
                         Id = movie.id,
@@ -36,7 +37,7 @@ namespace ProiectTMWA_Final.Services
                 }
 
                 return results;
-   
+
             }
 
         }
@@ -108,6 +109,16 @@ namespace ProiectTMWA_Final.Services
                 }
 
                 return response;
+            }
+        }
+
+        public IList<ApiMovie> GetAllMovies()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<ApiMovie>();
+                var movies = conn.Table<ApiMovie>().ToList();
+                return movies;
             }
         }
 

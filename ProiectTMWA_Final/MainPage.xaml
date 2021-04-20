@@ -8,15 +8,54 @@
         <ToolbarItem Text="My List" Activated="MyMovies_Activated"/>
         <ToolbarItem Text="Popular" Activated="AllMovies_Activated"/>
     </ContentPage.ToolbarItems>
+    <StackLayout Margin="40,20,40,0" >
+        <Picker x:Name="filterByStatusPicker" Title="Status" SelectedIndexChanged="OnItemSelectedFilter" >
+            <Picker.Items>
+                <x:String>ALL</x:String>
+                <x:String>In progress</x:String>
+                <x:String>Not started</x:String>
+                <x:String>Watched</x:String>
+            </Picker.Items>
+        </Picker>
 
-    <ListView x:Name="moviesListView" HasUnevenRows="True">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Frame IsClippedToBounds="True" HasShadow="True" Padding="0" BackgroundColor="White">                        <Frame.Margin>                            <OnPlatform x:TypeArguments="Thickness" Android="10" iOS="10" />                        </Frame.Margin>                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">                            <Frame HorizontalOptions="FillAndExpand" Margin="0,0,0,0" HasShadow="False" Padding="0">                                <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="10"  Margin="0,0,0,0"  BackgroundColor="Transparent">                                    <Grid.RowDefinitions>                                        <RowDefinition Height="*" />                                    </Grid.RowDefinitions>                                    <Grid.ColumnDefinitions>                                        <ColumnDefinition Width="auto"/>                                        <ColumnDefinition Width="*"/>                                    </Grid.ColumnDefinitions>                                    <StackLayout Grid.Row="0" Grid.Column="1" Padding="0"  Orientation="Vertical" VerticalOptions="CenterAndExpand">                                        <StackLayout Orientation="Horizontal" >                                            <Label Text="{Binding NameDisplayed}" Padding="10"  TextColor="#222" FontFamily="FA" FontSize = "25" VerticalOptions="CenterAndExpand"/>                                        </StackLayout>                                        <Label Text="{Binding StatusDisplayed}" Padding="10, 0, 0, 0"  FontSize = "16" VerticalOptions="CenterAndExpand"/>                                        <StackLayout Orientation="Horizontal" Padding="10">                                            <Label Text="{Binding .}" IsVisible="False"/>                                            <Button Text="Not started"  IsVisible="{Binding DisplayNotStartedButton}" FontSize = "14" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressNotStarted"/>                                            <Button Text="In Progress" IsVisible="{Binding DisplayInProgressButton}" FontSize = "14" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressInProgress"/>                                            <Button Text="Watched" IsVisible="{Binding DisplayWatchedButton}" FontSize = "14" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressWatched"/>                                            <Button Text="Delete"  FontSize = "14" TextColor="white" BackgroundColor="DarkRed" BorderRadius="12" Clicked="Remove"/>                                        </StackLayout>                                    </StackLayout>                                </Grid>                            </Frame>                        </StackLayout>                    </Frame>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
+        <ListView x:Name="moviesListView" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame IsClippedToBounds="True" HasShadow="True" Padding="0" BackgroundColor="White">
+                            <Frame.Margin>
+                                <OnPlatform x:TypeArguments="Thickness" Android="10" iOS="10" />
+                            </Frame.Margin>
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                <Frame HorizontalOptions="FillAndExpand" Margin="0,0,0,0" HasShadow="False" Padding="0">
+                                    <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Padding="10" BackgroundColor="Transparent">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Row="0" Grid.Column="1" Padding="0"   Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                            <StackLayout Orientation="Horizontal" >
+                                                <Label Text="{Binding NameDisplayed}" Padding="10"  TextColor="#222" FontFamily="FA" FontSize = "25" VerticalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                            <Label Text="{Binding StatusDisplayed}" Padding="0, 0, 10, 0" Margin="0,0,30,0" FontSize = "16" VerticalOptions="CenterAndExpand"/>
+                                            <StackLayout Orientation="Horizontal" Padding="10" >
+                                                <Label Text="{Binding .}" IsVisible="False"/>
+                                                <Button Text="Not started"  IsVisible="{Binding DisplayNotStartedButton}" FontSize = "14" WidthRequest="80" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressNotStarted"/>
+                                                <Button Text="In Progress" IsVisible="{Binding DisplayInProgressButton}" FontSize = "14" WidthRequest="90" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressInProgress"/>
+                                                <Button Text="Watched" IsVisible="{Binding DisplayWatchedButton}" FontSize = "14" VerticalOptions="CenterAndExpand"  TextColor="white" BorderRadius="12" BackgroundColor="DarkGreen" Clicked="UpdateMovieProgressWatched"/>
+                                                <Button Text="Delete"  FontSize = "14" TextColor="white" BackgroundColor="DarkRed" BorderRadius="12" Clicked="Remove"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

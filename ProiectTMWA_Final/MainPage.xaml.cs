@@ -15,20 +15,20 @@ namespace ProiectTMWA_Final
 {
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
         }
 
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<ApiMovie>();
-                var movies = conn.Table<ApiMovie>().ToList();
-                moviesListView.ItemsSource = movies;
-            }
+      
+            var movies = DependencyService.Get<Services.IMoviesService>().GetAllMovies();
+            moviesListView.ItemsSource = movies;
+
 
         }
         private void ToolbarItem_Activated(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace ProiectTMWA_Final
             }
             else
             {
-               await DisplayAlert("Failure", "Movie not removed!", "Ok");
+                await DisplayAlert("Failure", "Movie not removed!", "Ok");
             }
 
             OnAppearing();
@@ -97,6 +97,7 @@ namespace ProiectTMWA_Final
             }
             OnAppearing();
         }
+
         private async void UpdateMovieProgressWatched(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -118,6 +119,7 @@ namespace ProiectTMWA_Final
             }
             OnAppearing();
         }
+
         private async void UpdateMovieProgressInProgress(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -140,5 +142,31 @@ namespace ProiectTMWA_Final
             OnAppearing();
         }
 
+        private void OnItemSelectedFilter(object sender, EventArgs e)
+        {
+            var moviesFiltered = new List<ApiMovie>();
+            string selectedItem = filterByStatusPicker.SelectedItem.ToString();
+
+            var service = DependencyService.Get<Services.IMoviesService>();
+            var movies = service.GetAllMovies();
+
+            if (!selectedItem.Equals("ALL"))
+            {
+                StatusType status = MovieHelper.GetStatusEnumItem(selectedItem);
+
+                foreach (ApiMovie movie in movies)
+                {
+                    if (movie.Status.Equals(status))
+                    {
+                        moviesFiltered.Add(movie);
+                    }
+                }
+                moviesListView.ItemsSource = moviesFiltered;
+            }
+            else
+            {
+                moviesListView.ItemsSource = movies;
+            }
+        }
     }
 }
